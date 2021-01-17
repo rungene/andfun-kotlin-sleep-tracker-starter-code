@@ -23,7 +23,7 @@ import androidx.room.*
 interface SleepDatabaseDao{
 
     @Insert
-    suspend fun insert(night: SleepNight)
+     fun insert(night: SleepNight)
 
     @Update
     suspend fun update(night: SleepNight)
@@ -42,7 +42,7 @@ interface SleepDatabaseDao{
     fun getAllNights(): LiveData<List<SleepNight>>            // Room keeps this LiveData updated for us, and we don't have to specify an observer for it.
 
     @Query("SELECT * FROM daily_sleep_quality_table ORDER BY nightId DESC LIMIT 1")
-    suspend fun getTonight(): SleepNight?  //Make the returned SleepNight nullable, so that it can handle if the table is empty.
+   fun getTonight(): SleepNight?  //Make the returned SleepNight nullable, so that it can handle if the table is empty.
 
 
 }
