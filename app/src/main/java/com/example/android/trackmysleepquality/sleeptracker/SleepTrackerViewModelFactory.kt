@@ -22,6 +22,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.android.trackmysleepquality.database.SleepDatabaseDao
 
 /**
+
+ViewModelProvider.Factory is responsible to create your instance of ViewModel.
+If your ViewModel have dependencies and you want to test your ViewModel then you should
+create your own ViewModelProvider.Factory and passed dependency through ViewModel
+constructor and give value to the ViewModelProvider.Factory instance.
+*/
+
+/**
  * This is pretty much boiler plate code for a ViewModel Factory.
  *
  * Provides the SleepDatabaseDao and context to the ViewModel.
