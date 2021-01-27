@@ -70,9 +70,40 @@ class SleepTrackerViewModel(
                 it?.isNotEmpty()
         }
 
-        private val _navigateToSleepQuality =MutableLiveData<SleepNight>()
+        /**
+         * Request a toast by setting this value to true.
+         *
+         * This is private because we don't want to expose setting this value to the Fragment.
+         */
+        private var _showSnackbarEvent =MutableLiveData<Boolean>()
+
+        /**
+         * If this is true, immediately `show()` a toast and call `doneShowingSnackbar()`.
+         */
+        val showSnackbarEvent:LiveData<Boolean>
+        get() = _showSnackbarEvent
+
+
+
+
+        private var _navigateToSleepQuality =MutableLiveData<SleepNight>()
+
+        /**
+         * Call this immediately after calling `show()` on a toast.
+         *
+         * It will clear the toast request, so if the user rotates their phone it won't show a duplicate
+         * toast.
+         */
+
+        fun doneShowingSnackbar() {
+                _showSnackbarEvent.value = false
+        }
+
+
         val navigateToSleepQuality :LiveData<SleepNight>
                 get() = _navigateToSleepQuality
+
+
 
         fun doneNavigating(){
                 _navigateToSleepQuality.value = null
@@ -137,6 +168,7 @@ class SleepTrackerViewModel(
                 viewModelScope.launch {
                         clear()
                         tonight.value =null
+                        _showSnackbarEvent.value =true
                 }
         }
 
