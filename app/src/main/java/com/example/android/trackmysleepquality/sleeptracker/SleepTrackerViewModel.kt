@@ -35,7 +35,7 @@ class SleepTrackerViewModel(
         //variable to hold the current night
                 private var tonight = MutableLiveData<SleepNight?>()
         //get all nights in db
-        private val allNights = database.getAllNights()
+       val allNights = database.getAllNights()
 
 
 
