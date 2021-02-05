@@ -45,6 +45,8 @@ class SleepTrackerViewModel(
         }
 
 
+
+
 //tonight is null at the beginning
 
         /**
@@ -175,6 +177,23 @@ class SleepTrackerViewModel(
         private suspend fun clear(){
                 database.clear()
         }
+
+    //add a handler for the click event.
+    //You also need to add a MutableLiveData object to control the navigation.
+    private val _navigateToSleepDataQuality = MutableLiveData<Long>()
+    val navigateToSleepDataQuality
+        get() = _navigateToSleepDataQuality
+
+    //Define method to initiate and complete navigation.
+    //Initiate navigation by setting _navigateToSleepDataQuality.value to id:
+    fun onSleepNightClicked(id: Long){
+        _navigateToSleepDataQuality.value = id
+    }
+   // and then set it to null once navigation is completed:
+
+    fun onSleepDataQualityNavigated() {
+        _navigateToSleepDataQuality.value = null
+    }
 
 
 }
